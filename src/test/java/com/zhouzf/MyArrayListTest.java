@@ -50,7 +50,19 @@ public class MyArrayListTest {
     void testIsEmpty() {
         MyArrayList myArrayList = new MyArrayList();
         Assertions.assertTrue(myArrayList.isEmpty());
+        myArrayList.add(12);
+        Assertions.assertFalse(myArrayList.isEmpty());
+    }
 
+    @Test
+    void testSetElement() {
+        MyArrayList myArrayList = new MyArrayList();
+        myArrayList.add(12);
+        myArrayList.add(13);
+
+        myArrayList.set(0, 10);
+        Assertions.assertEquals(10, myArrayList.get(0));
+        Assertions.assertEquals(13, myArrayList.get(1));
     }
 
     @Test
