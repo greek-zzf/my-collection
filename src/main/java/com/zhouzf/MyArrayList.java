@@ -99,8 +99,11 @@ public class MyArrayList {
         return elementData[index];
     }
 
-    public void set(int index, Object obj) {
-        return;
+    public Object set(int index, Object obj) {
+        rangeCheck(index);
+        Object oldValue = elementData[index];
+        elementData[index] = obj;
+        return oldValue;
     }
 
     public int indexOf(Object obj) {
@@ -120,5 +123,4 @@ public class MyArrayList {
         }
         return -1;
     }
-
 }
