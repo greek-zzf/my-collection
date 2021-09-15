@@ -51,6 +51,8 @@
             </repositories>
         </profile>
     </profiles>
+
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -64,10 +66,19 @@
             <version>5.6.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>2.21.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
+
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.1</version>
@@ -75,6 +86,7 @@
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.0</version>
@@ -101,5 +113,6 @@
                 </dependencies>
             </plugin>
         </plugins>
+
     </build>
 </project>
