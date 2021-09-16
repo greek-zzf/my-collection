@@ -13,11 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class MyArrayListTest {
 
     @Test
-    void smokeTest() {
-        System.out.println("冒烟测试");
-    }
-
-    @Test
     void createMyArrayListTest() {
         MyArrayList emptyList = new MyArrayList();
         Assertions.assertTrue(emptyList.isEmpty());

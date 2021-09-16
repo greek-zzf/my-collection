@@ -40,14 +40,14 @@ public class MyArrayList {
 
     public boolean add(Object obj) {
         // 判断是否空数组
-        if (elementData.length == 0) {
+        if (elementData == EMPTY_ELEMENT_DATA) {
             elementData = new Object[DEFAULT_CAPACITY];
+            capacity = DEFAULT_CAPACITY;
         }
         // 判断数组是否已经满了，满了就对数组进行扩容操作
-        if (size >= capacity) {
+        if (size == capacity) {
             resize();
         }
-
         elementData[size++] = obj;
         return true;
     }
@@ -67,7 +67,7 @@ public class MyArrayList {
 
     public void add(int index, Object obj) {
         // 判断传入的索引是否合法
-        rangeCheck(index);
+        rangeCheckForAdd(index);
 
         // 判断是否空数组
         if (elementData.length == 0) {
@@ -77,20 +77,48 @@ public class MyArrayList {
         if (size == capacity) {
             resize();
         }
+        System.arraycopy(elementData, index, elementData, index + 1, size - index);
         elementData[index] = obj;
+        size++;
     }
 
-    private void rangeCheck(int index) {
-        if (index < 0 || index >= capacity) {
+    private void rangeCheckForAdd(int index) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(String.format("The index is out of bounds, index: %s size: %s", index, capacity));
         }
     }
 
+
     public Object remove(int index) {
-        return null;
+        rangeCheck(index);
+        Object oldValue = elementData[index];
+        System.arraycopy(elementData, index + 1, elementData, index, size - index - 1);
+        elementData[--size] = null;
+        return oldValue;
+    }
+
+    private void rangeCheck(int index) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException(String.format("The index is out of bounds, index: %s size: %s", index, size));
+        }
     }
 
     public boolean remove(Object obj) {
+        if (obj == null) {
+            for (int index = 0; index < size; index++) {
+                if (elementData[index] == null) {
+                    remove(index);
+                    return true;
+                }
+            }
+        } else {
+            for (int index = 0; index < size; index++) {
+                if (elementData[index].equals(obj)) {
+                    remove(index);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
