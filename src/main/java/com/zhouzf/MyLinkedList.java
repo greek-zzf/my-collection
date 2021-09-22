@@ -213,6 +213,18 @@ public class MyLinkedList<E> {
         return -1;
     }
 
+    public boolean contains(Object obj) {
+        return indexOf(obj) != -1;
+    }
+
+    public E set(int index, E element) {
+        checkElementIndex(index);
+        Node<E> indexNode = getNodeByIndex(index);
+        E oldValue = indexNode.element;
+        indexNode.element = element;
+        return oldValue;
+    }
+
 
     private static class Node<E> {
         Node prev;

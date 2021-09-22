@@ -163,5 +163,27 @@ class MyLinkedListTest {
         Assertions.assertEquals(-1, myLinkedList.indexOf(20));
     }
 
+    @Test
+    void testContains() {
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add(12);
+        myLinkedList.add(13);
+
+        Assertions.assertTrue(myLinkedList.contains(12));
+        Assertions.assertFalse(myLinkedList.contains(null));
+
+    }
+
+    @Test
+    void testSet() {
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add(11);
+        myLinkedList.add(22);
+
+        Assertions.assertEquals(22, myLinkedList.set(1, 33));
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myLinkedList.set(2, 11));
+        Assertions.assertEquals(33, myLinkedList.get(1));
+    }
+
 
 }
