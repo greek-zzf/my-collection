@@ -36,7 +36,12 @@ public class MyLinkedList<E> {
         Node indexNode = getNodeByIndex(index);
         Node preNode = indexNode.prev;
         Node newNode = new Node(preNode, indexNode, element);
-        preNode.next = newNode;
+
+        if (preNode == null) {
+            first = newNode;
+        } else {
+            preNode.next = newNode;
+        }
         indexNode.prev = newNode;
         size++;
     }
@@ -77,6 +82,10 @@ public class MyLinkedList<E> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(String.format("The index is out of bounds, index: %s size: %s", index, size));
         }
+    }
+
+    public int size() {
+        return size;
     }
 
 

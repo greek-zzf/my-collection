@@ -19,12 +19,20 @@ class MyLinkedListTest {
 
 
     @Test
+    void createMyLinkedListTest() {
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+        linkedList.add(1);
+        Assertions.assertEquals(1, linkedList.get(0));
+    }
+
+
+    @Test
     void addLastTest() {
         MyLinkedList<Integer> linkedList = new MyLinkedList<>();
         linkedList.add(1);
         linkedList.add(2);
-        linkedList.add(2);
 
+        Assertions.assertTrue(linkedList.add(2));
         Assertions.assertEquals(1, linkedList.get(0));
         Assertions.assertEquals(2, linkedList.get(1));
         Assertions.assertEquals(2, linkedList.get(2));
@@ -41,8 +49,13 @@ class MyLinkedListTest {
 
         linkedList.add(2, 12);
         Assertions.assertEquals(12, linkedList.get(2));
-
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> linkedList.add(5, 12));
+
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        myLinkedList.add(21);
+        myLinkedList.add(0, 10);
+        Assertions.assertEquals(2, myLinkedList.size());
+        Assertions.assertEquals(10, myLinkedList.get(0));
     }
 
     @Test
@@ -58,5 +71,6 @@ class MyLinkedListTest {
 
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> myLinkedList.get(3));
     }
+
 
 }
