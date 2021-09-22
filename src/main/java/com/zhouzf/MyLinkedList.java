@@ -13,11 +13,18 @@ public class MyLinkedList<E> {
         Node lastTag = last;
         Node newNode = new Node(lastTag, null, element);
         last = newNode;
+        // 考虑特殊情况（当链表为空时，添加一条数据）
+        if (lastTag == null) {
+            first = newNode;
+        } else {
+            lastTag.next = newNode;
+        }
+        size++;
         return true;
     }
 
     public void add(int index, E element) {
-        rangeCheck(index);
+        rangeCheckForAdd(index);
         if (index == size) {
             addLast(element);
         } else {
@@ -38,30 +45,42 @@ public class MyLinkedList<E> {
         add(element);
     }
 
-    private Node getNodeByIndex(int index) {
+    private Node<E> getNodeByIndex(int index) {
         // 遍历获取坐标
         if (index < size / 2) {
-            Node firstNode = first;
+            Node<E> firstNode = first;
             for (int i = 0; i < index; i++) {
-
+                firstNode = firstNode.next;
             }
+            return firstNode;
         } else {
-            Node lastNode = last;
+            Node<E> lastNode = last;
             for (int i = size - 1; i > index; i--) {
-                lastNode = lastNode.next;
+                lastNode = lastNode.prev;
             }
+            return lastNode;
         }
-        return null;
     }
 
-    private void rangeCheck(int index) {
+    private void rangeCheckForAdd(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException(String.format("The index is out of bounds, index: %s size: %s", index, size));
         }
     }
 
+    public E get(int index) {
+        checkElementIndex(index);
+        return getNodeByIndex(index).element;
+    }
 
-    static class Node<E> {
+    private void checkElementIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(String.format("The index is out of bounds, index: %s size: %s", index, size));
+        }
+    }
+
+
+    private static class Node<E> {
         Node prev;
         Node next;
         E element;
